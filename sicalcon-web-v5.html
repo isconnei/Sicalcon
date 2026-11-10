@@ -1,9 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SICALCON — Clima, Calefacción y Construcción</title>
+<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>SICALCON - Clima, Calefacción y Construcción</title><title>SICALCON — Clima, Calefacción y Construcción</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap');
 
@@ -28,6 +23,10 @@
     --green-deep: #176d3f;
     --focus: #1f7a8c;
     --shadow: 0 1px 2px rgba(31,42,46,0.06), 0 10px 28px -14px rgba(31,42,46,0.22);
+    --font-heading: "Fraunces";
+    --font-body: "IBM Plex Sans";
+    --font-mono: "IBM Plex Mono";
+    --radius-card: 16px;
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
@@ -50,17 +49,50 @@
     --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 14px 32px -16px rgba(0,0,0,0.55);
   }
 
+  /* ============ Tema alternativo: estilo Eloygasfiter (v4) ============
+     Mismo HTML, misma estructura; solo cambian tokens de color/tipografía.
+     Se activa con [data-style="eloygasfiter"] en <html> y gana siempre
+     (incluso en modo oscuro del sistema) porque es una elección explícita
+     de la persona, no una preferencia de sistema. Esta referencia no tiene
+     modo oscuro, así que el tema queda siempre claro. */
+  :root[data-style="eloygasfiter"]{
+    --paper: #ffffff;
+    --paper-raised: #ffffff;
+    --paper-alt: #f7fbff;
+    --ink: #072a67;
+    --ink-soft: #55677f;
+    --line: #d9e6f5;
+    --clima: #0055c9;
+    --clima-deep: #003e94;
+    --clima-soft: #e8f1ff;
+    --calor: #a02222;
+    --calor-deep: #7c1a1a;
+    --calor-soft: #ffe9e3;
+    --obra: #072a67;
+    --obra-deep: #001432;
+    --obra-soft: #edf6ff;
+    --accent: #0055c9;
+    --green: #16a34a;
+    --green-deep: #12863d;
+    --focus: #0055c9;
+    --shadow: 0 1px 2px rgba(7,42,103,0.05), 0 16px 32px -18px rgba(7,42,103,0.28);
+    --font-heading: Arial, Helvetica;
+    --font-body: Arial, Helvetica;
+    --font-mono: Arial, Helvetica;
+    --radius-card: 12px;
+  }
+
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
-  body{margin:0;background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans",ui-sans-serif,system-ui,sans-serif;-webkit-font-smoothing:antialiased;}
-  h1,h2,h3{font-family:"Fraunces",Georgia,serif;text-wrap:balance;margin:0;line-height:1.1;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-body),ui-sans-serif,system-ui,sans-serif;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3{font-family:var(--font-heading),Georgia,serif;text-wrap:balance;margin:0;line-height:1.1;}
   p{line-height:1.6;}
   a{color:inherit;}
   img{max-width:100%;display:block;}
   button{font-family:inherit;}
   :focus-visible{outline:2px solid var(--focus);outline-offset:3px;border-radius:4px;}
   .wrap{max-width:1180px;margin-inline:auto;padding-inline:clamp(16px,4vw,40px);}
-  .eyebrow{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);}
+  .eyebrow{font-family:var(--font-mono),ui-monospace,monospace;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);}
   .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);}
 
   /* topbar */
@@ -74,14 +106,23 @@
   .brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
   .brand-badge{width:40px;height:40px;border-radius:10px;background:#f2f2f0;display:flex;align-items:center;justify-content:center;overflow:hidden;flex:none;box-shadow:var(--shadow);}
   .brand-badge img{width:92%;height:92%;object-fit:contain;}
-  .brand-name{font-family:"Fraunces",serif;font-weight:600;font-size:1.05rem;color:var(--ink);}
-  .brand-tag{display:block;font-size:.66rem;color:var(--ink-soft);font-family:"IBM Plex Mono",monospace;}
+  .brand-name{font-family:var(--font-heading),serif;font-weight:600;font-size:1.05rem;color:var(--ink);}
+  .brand-tag{display:block;font-size:.66rem;color:var(--ink-soft);font-family:var(--font-mono),monospace;}
   nav.primary{display:flex;align-items:center;gap:20px;}
   nav.primary a{text-decoration:none;font-size:.9rem;font-weight:500;color:var(--ink-soft);padding-block:6px;border-bottom:2px solid transparent;}
   nav.primary a:hover{color:var(--ink);border-color:var(--line);}
   .header-actions{display:flex;align-items:center;gap:10px;}
   .nav-toggle{display:none;background:none;border:1px solid var(--line);border-radius:10px;width:40px;height:40px;align-items:center;justify-content:center;color:var(--ink);}
   .nav-toggle svg{width:20px;height:20px;}
+
+  /* Selector de tema (clásico / eloygasfiter) */
+  .theme-switch{display:flex;align-items:center;gap:2px;background:var(--paper-alt);border:1px solid var(--line);border-radius:999px;padding:3px;}
+  .theme-switch button{appearance:none;border:none;background:none;cursor:pointer;font-size:.74rem;font-weight:600;font-family:inherit;color:var(--ink-soft);padding:6px 11px;border-radius:999px;white-space:nowrap;transition:background .15s ease,color .15s ease;}
+  .theme-switch button[aria-pressed="true"]{background:var(--paper-raised);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.08);}
+  @media (max-width:980px){ .theme-switch{display:none;} }
+  .theme-switch-mobile{display:flex;align-items:center;gap:2px;background:var(--paper-alt);border:1px solid var(--line);border-radius:999px;padding:3px;margin:14px 0 6px;}
+  .theme-switch-mobile button{appearance:none;border:none;background:none;cursor:pointer;font-size:.78rem;font-weight:600;font-family:inherit;color:var(--ink-soft);padding:8px 12px;border-radius:999px;flex:1;transition:background .15s ease,color .15s ease;}
+  .theme-switch-mobile button[aria-pressed="true"]{background:var(--paper-raised);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.08);}
   #mobile-menu{display:none;border-top:1px solid var(--line);background:var(--paper-raised);}
   #mobile-menu.open{display:block;}
   #mobile-menu .wrap{display:flex;flex-direction:column;padding-block:10px;}
@@ -111,10 +152,10 @@
   .hero-art img{width:100%;height:auto;}
 
   .triage{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:clamp(26px,5vw,40px);}
-  .triage-card{display:flex;flex-direction:column;gap:10px;background:var(--paper-raised);border:1px solid var(--line);border-radius:16px;padding:18px 18px 16px;text-decoration:none;color:var(--ink);box-shadow:var(--shadow);transition:transform .15s ease;}
+  .triage-card{display:flex;flex-direction:column;gap:10px;background:var(--paper-raised);border:1px solid var(--line);border-radius:var(--radius-card,16px);padding:18px 18px 16px;text-decoration:none;color:var(--ink);box-shadow:var(--shadow);transition:transform .15s ease;}
   .triage-card:hover{transform:translateY(-3px);}
   .triage-icon{width:36px;height:36px;}
-  .triage-card b{font-family:"Fraunces",serif;font-size:1.02rem;font-weight:600;}
+  .triage-card b{font-family:var(--font-heading),serif;font-size:1.02rem;font-weight:600;}
   .triage-card span{font-size:.86rem;color:var(--ink-soft);}
   .triage-go{margin-top:auto;font-size:.8rem;font-weight:600;display:flex;align-items:center;gap:4px;}
   .c-clima .triage-icon,.c-clima .triage-go{color:var(--clima);}
@@ -135,7 +176,7 @@
 
   .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;counter-reset:step;}
   .step{position:relative;padding-top:6px;border-top:2px solid var(--line);}
-  .step::before{counter-increment:step;content:counter(step,decimal-leading-zero);font-family:"IBM Plex Mono",monospace;font-size:.76rem;color:var(--accent);display:block;margin-bottom:10px;}
+  .step::before{counter-increment:step;content:counter(step,decimal-leading-zero);font-family:var(--font-mono),monospace;font-size:.76rem;color:var(--accent);display:block;margin-bottom:10px;}
   .step h3{font-size:1.05rem;font-weight:600;margin-bottom:6px;}
   .step p{color:var(--ink-soft);font-size:.92rem;margin:0;}
 
@@ -144,16 +185,16 @@
   .cat-filter button{border:1px solid var(--line);background:var(--paper-raised);color:var(--ink-soft);border-radius:999px;padding:8px 14px;font-size:.84rem;cursor:pointer;font-weight:500;}
   .cat-filter button.active{background:var(--clima);color:#fff;border-color:var(--clima);}
   .products{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
-  .product-card{background:var(--paper-raised);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;}
+  .product-card{background:var(--paper-raised);border:1px solid var(--line);border-radius:var(--radius-card,18px);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;}
   .product-photo{aspect-ratio:4/3;border-bottom:1px dashed var(--line);background:var(--paper-alt);display:flex;align-items:center;justify-content:center;color:var(--ink-soft);position:relative;}
   .product-photo svg{width:40px;height:40px;opacity:.5;}
-  .product-photo span{position:absolute;bottom:8px;left:8px;right:8px;font-size:.64rem;font-family:"IBM Plex Mono",monospace;opacity:.75;text-align:center;}
+  .product-photo span{position:absolute;bottom:8px;left:8px;right:8px;font-size:.64rem;font-family:var(--font-mono),monospace;opacity:.75;text-align:center;}
   .product-body{padding:16px 16px 18px;display:flex;flex-direction:column;gap:6px;flex:1;}
-  .product-tag{font-size:.68rem;font-family:"IBM Plex Mono",monospace;color:var(--clima);text-transform:uppercase;letter-spacing:.06em;}
-  .product-name{font-family:"Fraunces",serif;font-weight:600;font-size:1.05rem;}
+  .product-tag{font-size:.68rem;font-family:var(--font-mono),monospace;color:var(--clima);text-transform:uppercase;letter-spacing:.06em;}
+  .product-name{font-family:var(--font-heading),serif;font-weight:600;font-size:1.05rem;}
   .product-meta{font-size:.82rem;color:var(--ink-soft);}
   .product-price{font-size:.84rem;color:var(--ink-soft);margin-top:4px;padding-top:8px;border-top:1px solid var(--line);}
-  .product-price b{color:var(--ink);font-family:"IBM Plex Mono",monospace;}
+  .product-price b{color:var(--ink);font-family:var(--font-mono),monospace;}
   .product-cta{margin-top:10px;}
   .catalog-note{margin-top:18px;font-size:.82rem;color:var(--ink-soft);border:1px dashed var(--line);border-radius:12px;padding:12px 14px;}
 
@@ -183,12 +224,12 @@
   .service-photos{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
   .photo-slot{aspect-ratio:4/3;border-radius:14px;border:1px dashed var(--line);background:var(--paper-raised);display:flex;align-items:center;justify-content:center;color:var(--ink-soft);overflow:hidden;position:relative;}
   .photo-slot svg{width:32px;height:32px;opacity:.55;}
-  .photo-slot span{position:absolute;bottom:8px;left:8px;right:8px;font-size:.66rem;font-family:"IBM Plex Mono",monospace;opacity:.7;}
+  .photo-slot span{position:absolute;bottom:8px;left:8px;right:8px;font-size:.66rem;font-family:var(--font-mono),monospace;opacity:.7;}
 
   .why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
   .why-card{background:var(--paper-raised);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow);}
   .why-card svg{width:24px;height:24px;color:var(--accent);margin-bottom:10px;}
-  .why-card h3{font-size:.98rem;font-weight:600;margin-bottom:6px;font-family:"IBM Plex Sans",sans-serif;}
+  .why-card h3{font-size:.98rem;font-weight:600;margin-bottom:6px;font-family:var(--font-body),sans-serif;}
   .why-card p{font-size:.86rem;color:var(--ink-soft);margin:0;}
 
   .coverage{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,44px);align-items:center;background:var(--paper-raised);border:1px solid var(--line);border-radius:22px;padding:clamp(22px,4vw,40px);}
@@ -253,10 +294,7 @@
   @media (max-width:420px){
     .products{grid-template-columns:1fr;}
   }
-</style>
-</head>
-<body>
-
+</style></head><body>
 
 <div class="topbar">
   <div class="wrap">
@@ -283,6 +321,10 @@
       <a href="#contacto">Contacto</a>
     </nav>
     <div class="header-actions">
+      <div class="theme-switch" role="group" aria-label="Elegir estilo visual del sitio">
+        <button type="button" id="theme-btn-classic" data-style-choice="" aria-pressed="true">Clásico</button>
+        <button type="button" id="theme-btn-eloy" data-style-choice="eloygasfiter" aria-pressed="false">Estilo alterno</button>
+      </div>
       <a class="btn btn-whatsapp btn-sm" id="wa-header" href="#" target="_blank" rel="noopener" data-wa>
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.2.2-.3.2-.5.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.4.1-.2 0-.4 0-.5-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1.1 2.6c.1.2 1.8 2.8 4.4 3.9.6.3 1.1.4 1.5.5.6.2 1.2.2 1.6.1.5-.1 1.7-.7 1.9-1.3.2-.6.2-1.1.2-1.3-.1-.1-.2-.2-.5-.3z"/><path d="M12 2C6.5 2 2 6.4 2 12c0 1.9.5 3.6 1.5 5.2L2 22l4.9-1.5c1.5.8 3.2 1.3 5.1 1.3 5.5 0 10-4.4 10-10S17.5 2 12 2zm0 18.2c-1.7 0-3.3-.5-4.7-1.3l-.3-.2-3 .9.9-2.9-.2-.3C3.9 15 3.3 13.5 3.3 12c0-4.8 3.9-8.7 8.7-8.7s8.7 3.9 8.7 8.7-3.9 8.7-8.7 8.7z"/></svg>
         WhatsApp
@@ -300,6 +342,10 @@
       <a href="#calefaccion">Calefacción</a>
       <a href="#construccion">Construcción</a>
       <a href="#contacto">Contacto</a>
+      <div class="theme-switch-mobile" role="group" aria-label="Elegir estilo visual del sitio">
+        <button type="button" id="theme-btn-classic-m" data-style-choice="" aria-pressed="true">Clásico</button>
+        <button type="button" id="theme-btn-eloy-m" data-style-choice="eloygasfiter" aria-pressed="false">Estilo alterno</button>
+      </div>
     </div>
   </div>
 </header>
@@ -711,6 +757,50 @@
     el.setAttribute('href', waLink(msg));
   });
 
+  // Selector de tema (clásico / estilo alterno "eloygasfiter")
+  (function(){
+    const STORAGE_KEY = 'sicalcon-style';
+    const buttonGroups = [
+      ['theme-btn-classic', 'theme-btn-eloy'],
+      ['theme-btn-classic-m', 'theme-btn-eloy-m']
+    ];
+    const allButtons = [];
+    buttonGroups.forEach(function(ids){
+      ids.forEach(function(id){
+        const el = document.getElementById(id);
+        if (el) allButtons.push(el);
+      });
+    });
+
+    function applyStyle(style){
+      if (style){
+        document.documentElement.setAttribute('data-style', style);
+      } else {
+        document.documentElement.removeAttribute('data-style');
+      }
+      allButtons.forEach(function(btn){
+        const match = btn.getAttribute('data-style-choice') === style;
+        btn.setAttribute('aria-pressed', match ? 'true' : 'false');
+      });
+    }
+
+    function saveStyle(style){
+      try { localStorage.setItem(STORAGE_KEY, style); } catch(e){ /* almacenamiento no disponible */ }
+    }
+
+    let initial = '';
+    try { initial = localStorage.getItem(STORAGE_KEY) || ''; } catch(e){ initial = ''; }
+    applyStyle(initial);
+
+    allButtons.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        const style = btn.getAttribute('data-style-choice') || '';
+        applyStyle(style);
+        saveStyle(style);
+      });
+    });
+  })();
+
   // Menú móvil
   const navToggle = document.getElementById('nav-toggle');
   const mobileMenu = document.getElementById('mobile-menu');
@@ -774,6 +864,4 @@
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 </script>
-
-</body>
-</html>
+</body></html>
